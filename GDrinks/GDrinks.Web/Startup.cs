@@ -1,9 +1,12 @@
 ﻿namespace GDrinks.Web
 {
+    using GDrinks.Common.Mapping;
     using GDrinks.Data;
     using GDrinks.Models;
     using GDrinks.Services;
     using GDrinks.Services.Implementations;
+    using GDrinks.Services.Models;
+    using GDrinks.Web.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -35,6 +38,8 @@
                 .AddDbContext<GDrinksDbContext>(options => options
                     .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
+            AutoMapperConfig.RegisterMappings(typeof(IService).Assembly);
+
             services
                 .AddIdentity<User, IdentityRole>(options =>
                 {
@@ -49,6 +54,13 @@
                 .AddDefaultTokenProviders();
 
             services.AddSingleton<IDbSeederService, DbSeederService>();
+            services.AddScoped<ShoppingCart>();
+
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddDomainServices();
+
+            services.AddSession();
 
             services
                 .AddMvc()
@@ -72,7 +84,10 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseDatabaseMigration();
+
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

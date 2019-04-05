@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GDrinks.Common\GDrinks.Common.csproj" />
     <ProjectReference Include="..\GDrinks.Data\GDrinks.Data.csproj" />
     <ProjectReference Include="..\GDrinks.Models\GDrinks.Models.csproj" />
   </ItemGroup>

@@ -1,13 +1,22 @@
 ﻿namespace GDrinks.Web.Controllers
 {
+    using GDrinks.Services;
     using GDrinks.Web.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     public class HomeController : Controller
     {
+        private readonly IDrinkService drinks;
+
+        public HomeController(IDrinkService drinks)
+        {
+            this.drinks = drinks;
+        }
+
         [HttpGet]
-        public IActionResult Index() => View();
+        public async Task<IActionResult> Index() => View(await this.drinks.Preferred());
 
         [HttpGet]
         public IActionResult Privacy() => View();

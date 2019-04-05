@@ -19,6 +19,8 @@
 
         public DbSet<OrderItem> OrderItems { get; set; }
 
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);

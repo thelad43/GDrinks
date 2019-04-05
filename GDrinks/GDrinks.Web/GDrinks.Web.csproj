@@ -21,7 +21,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <Folder Include="Views\Shared\Components\CategoryMenu\" />
+    <Folder Include="Views\Shared\Components\ShoppingCartSummary\" />
   </ItemGroup>
 
 </Project>
