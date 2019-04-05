@@ -3,6 +3,7 @@
     using GDrinks.Common;
     using GDrinks.Common.Mapping;
     using GDrinks.Data;
+    using GDrinks.Models;
     using GDrinks.Services.Models;
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -76,5 +77,10 @@
                 .Where(d => d.IsPreferredDrink)
                 .To<DrinkServiceModel>()
                 .ToListAsync();
+
+        public async Task<Drink> ByIdAsync(int id)
+            => await this.db
+                .Drinks
+                .FirstOrDefaultAsync(d => d.Id == id);
     }
 }

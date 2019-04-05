@@ -54,7 +54,8 @@
                 .AddDefaultTokenProviders();
 
             services.AddSingleton<IDbSeederService, DbSeederService>();
-            services.AddScoped<ShoppingCart>();
+
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
             services.AddRouting(options => options.LowercaseUrls = true);
 

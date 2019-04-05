@@ -1,5 +1,6 @@
 ﻿namespace GDrinks.Services.Models
 {
+    using GDrinks.Common.Mapping;
     using GDrinks.Data;
     using GDrinks.Models;
     using Microsoft.AspNetCore.Http;
@@ -87,12 +88,11 @@
         }
 
         public List<CartItem> GetShoppingCartItems()
-        {
-            return this.Items ??
-                    (this.Items = this.db.CartItems.Where(c => c.ShoppingCartId == this.Id)
-                    .Include(s => s.Drink)
-                    .ToList());
-        }
+            => this.db
+                .CartItems
+                .Where(ci => ci.ShoppingCartId == this.Id)
+                .Include(ci => ci.Drink)
+                .ToList();
 
         public void ClearCart()
         {

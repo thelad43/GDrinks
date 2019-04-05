@@ -1,5 +1,6 @@
 ﻿namespace GDrinks.Services
 {
+    using GDrinks.Models;
     using GDrinks.Services.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -15,5 +16,7 @@
         Task<int> AlcoholicCountAsync();
 
         Task<int> NonAlcoholicCountAsync();
+
+        Task<Drink> ByIdAsync(int id);
     }
 }
