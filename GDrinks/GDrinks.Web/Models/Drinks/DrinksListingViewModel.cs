@@ -7,6 +7,8 @@
     {
         public IEnumerable<DrinkServiceModel> Drinks { get; set; } = new List<DrinkServiceModel>();
 
+        public string Category { get; set; }
+
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }

@@ -11,5 +11,9 @@
         Task<IEnumerable<DrinkServiceModel>> Preferred();
 
         Task<int> CountAsync();
+
+        Task<int> AlcoholicCountAsync();
+
+        Task<int> NonAlcoholicCountAsync();
     }
 }

@@ -20,13 +20,19 @@
         {
             var drinks = await this.drinks.AllAsync(id, category);
 
-            var drinksCount = await this.drinks.CountAsync();
+            var drinksCount = 
+                category == null ? 
+                await this.drinks.CountAsync() : 
+                    (category.ToLower() == "alcoholic" ?
+                        await this.drinks.AlcoholicCountAsync() :
+                        await this.drinks.NonAlcoholicCountAsync());
 
             var model = new DrinksListingViewModel
             {
                 Drinks = drinks,
                 CurrentPage = id,
                 DrinksCount = drinksCount,
+                Category = category ?? string.Empty,
                 PagesCount = (int)Math.Ceiling(drinksCount / (decimal)WebConstants.DrinksPerPage)
             };
 

@@ -1,14 +1,14 @@
 ﻿namespace GDrinks.Services.Implementations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using GDrinks.Common;
     using GDrinks.Common.Mapping;
     using GDrinks.Data;
     using GDrinks.Services.Models;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class DrinkService : IDrinkService
     {
@@ -37,7 +37,7 @@
 
             var category = await this.db
                 .Categories
-                .FirstOrDefaultAsync(c => c.Name == categoryName);
+                .FirstOrDefaultAsync(c => c.Name.ToLower() == categoryName.ToLower());
 
             if (category == null)
             {
@@ -55,6 +55,18 @@
         public async Task<int> CountAsync()
             => await this.db
                 .Drinks
+                .CountAsync();
+
+        public async Task<int> AlcoholicCountAsync()
+           => await this.db
+               .Drinks
+               .Where(d => d.Category.Name.ToLower() != WebConstants.NonAlcoholic)
+               .CountAsync();
+
+        public async Task<int> NonAlcoholicCountAsync()
+            => await this.db
+                .Drinks
+                .Where(d => d.Category.Name.ToLower() != WebConstants.Alcoholic)
                 .CountAsync();
 
         public async Task<IEnumerable<DrinkServiceModel>> Preferred()
