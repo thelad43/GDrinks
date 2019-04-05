@@ -1,4 +1,4 @@
-﻿namespace GDrinks.Web.Data.Migrations
+﻿namespace GDrinks.Data.Migrations
 {
     using System;
     using Microsoft.EntityFrameworkCore.Metadata;
