@@ -15,6 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GDrinks.Data\GDrinks.Data.csproj" />
+    <ProjectReference Include="..\GDrinks.Services\GDrinks.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
 </Project>

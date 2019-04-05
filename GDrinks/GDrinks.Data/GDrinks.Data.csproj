@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GDrinks.Models\GDrinks.Models.csproj" />
+  </ItemGroup>
+
 </Project>

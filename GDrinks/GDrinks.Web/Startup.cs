@@ -1,6 +1,9 @@
 ﻿namespace GDrinks.Web
 {
     using GDrinks.Data;
+    using GDrinks.Models;
+    using GDrinks.Services;
+    using GDrinks.Services.Implementations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -28,13 +31,24 @@
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<GDrinksDbContext>(options => options
-                .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+            services
+                .AddDbContext<GDrinksDbContext>(options => options
+                    .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services
-                .AddDefaultIdentity<IdentityUser>()
+                .AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.User.RequireUniqueEmail = true;
+                })
                 .AddDefaultUI(UIFramework.Bootstrap3)
-                .AddEntityFrameworkStores<GDrinksDbContext>();
+                .AddEntityFrameworkStores<GDrinksDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddSingleton<IDbSeederService, DbSeederService>();
 
             services
                 .AddMvc()
@@ -66,6 +80,9 @@
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // var dbSeederService = new DbSeederService();
+            // dbSeederService.SeedData(app);
         }
     }
 }
