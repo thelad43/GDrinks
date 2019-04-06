@@ -16,9 +16,11 @@
             this.drinks = drinks;
         }
 
-        public async Task<IActionResult> Index(int id = 1, string category = null)
+        public async Task<IActionResult> Index(int id = 1, string category = null, string search = null)
         {
-            var drinks = await this.drinks.AllAsync(id, category);
+            var drinks = await this.drinks.AllAsync(id, category, search);
+
+            var searchedDrinks = await this.drinks.CountBySearchAsync(search);
 
             var drinksCount = 
                 category == null ? 
@@ -27,12 +29,15 @@
                         await this.drinks.AlcoholicCountAsync() :
                         await this.drinks.NonAlcoholicCountAsync());
 
+            drinksCount -= (drinksCount - searchedDrinks);
+
             var model = new DrinksListingViewModel
             {
                 Drinks = drinks,
                 CurrentPage = id,
                 DrinksCount = drinksCount,
                 Category = category ?? string.Empty,
+                Search = search,
                 PagesCount = (int)Math.Ceiling(drinksCount / (decimal)WebConstants.DrinksPerPage)
             };
 

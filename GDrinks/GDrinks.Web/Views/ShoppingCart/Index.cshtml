@@ -6,25 +6,25 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Amount</th>
-                <th>Drink</th>
-                <th class="text-right">Price per drink</th>
-                <th class="text-right">Subtotal</th>
-                <th></th>
+                <th scope="col" class="text-center">Amount</th>
+                <th scope="col" class="text-center">Drink</th>
+                <th scope="col" class="text-right">Price per drink</th>
+                <th scope="col" class="text-right">Subtotal</th>
+                <th scope="col"  class="text-center">Remove</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.ShoppingCart.Items)
             {
-                <tr>
-                    <td class="text-center">@item.Amount</td>
-                    <td class="text-left">@item.Drink.Name</td>
-                    <td class="text-right">@item.Drink.Price.ToString("c")</td>
-                    <td class="text-right">
-                        @((item.Amount * item.Drink.Price).ToString("c"))
-                    </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-area="" asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Drink.Id"></a></td>
-                </tr>
+            <tr>
+                <td class="col-md-2 text-center">@item.Amount</td>
+                <td class="col-md-4 text-center">@item.Drink.Name</td>
+                <td class="col-md-2 text-right">@item.Drink.Price.ToString("c")</td>
+                <td class="col-md-2 text-right">
+                    @((item.Amount * item.Drink.Price).ToString("c"))
+                </td>
+                <td class="col-md-2 text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-area="" asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.Drink.Id"></a></td>
+            </tr>
             }
         </tbody>
         <tfoot>
@@ -36,10 +36,11 @@
             </tr>
         </tfoot>
     </table>
+    <br />
     <div class="text-right">
         <div class="btn-group ">
             <a class="btn btn-success" asp-area="" asp-controller="Order" asp-action="Checkout">Check out</a>
-            <a class="btn-group">
+            <div class="btn-group">
                 <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     Add more drinks<span class="caret"></span>
                 </a>
@@ -47,7 +48,7 @@
                     <li><a asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-category="Alcoholic">Alcoholic</a></li>
                     <li><a asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-category="Non-alcoholic">Non Alcoholic</a></li>
                 </ul>
-            </a>
+            </div>
         </div>
     </div>
 </div>

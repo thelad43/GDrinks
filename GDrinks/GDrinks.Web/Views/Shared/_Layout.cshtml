@@ -36,14 +36,18 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         @await Component.InvokeAsync("CategoryMenu")
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><partial name="_LoginPartial" /></li>
                     </ul>
-                    <form class="navbar-form navbar-right" asp-controller="Drink" asp-action="Search" method="get">
+                    <form asp-area="" asp-controller="Drinks" asp-action="Index" class="navbar-form navbar-right">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search for a drink" name="searchString" value="@ViewData["searchString"]">
+                            <input type="text" class="form-control" placeholder="Search for a drink" name="search">
+                            <button class="btn btn-primary" type="submit">Search</button>
                         </div>
                     </form>
                 </div>
@@ -80,7 +84,7 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-        </script>
+        </script> 
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

@@ -7,6 +7,13 @@
 <br />
 <br />
 
+@if (Model.Search != null && !string.IsNullOrEmpty(Model.Search))
+{
+<p>
+    <h4 class="bg-info" style="font-size:40px">Search results for '@Model.Search'</h4>
+</p>
+}
+
 <div class="row marginTop">
     @foreach (var drink in Model.Drinks)
     {
@@ -19,7 +26,7 @@
         @if (Model.CurrentPage > 1)
         {
             <li class="page-item">
-                <a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@Model.PreviousPage" asp-route-category="@Model.Category" aria-label="Previous">
+                <a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@Model.PreviousPage" asp-route-category="@Model.Category" asp-route-search="@Model.Search" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -69,16 +76,16 @@
 
             if (i > 0 && pageNumber - 1 != pagesToShow[i - 1])
             {
-                <li class="page-item @className"><a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@(pagesToShow[i - 1] + 1)" asp-route-category="@Model.Category">...</a></li>
+                <li class="page-item @className"><a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@(pagesToShow[i - 1] + 1)" asp-route-category="@Model.Category" asp-route-search="@Model.Search">...</a></li>
             }
 
-            <li class="page-item @className"><a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@pageNumber" asp-route-category="@Model.Category">@pageNumber</a></li>
+            <li class="page-item @className"><a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@pageNumber" asp-route-category="@Model.Category" asp-route-search="@Model.Search">@pageNumber</a></li>
         }
 
         @if (Model.CurrentPage < Model.PagesCount)
         {
             <li class="page-item">
-                <a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@Model.NextPage" asp-route-category="@Model.Category" aria-label="Next">
+                <a class="page-link" asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="@Model.NextPage" asp-route-category="@Model.Category" asp-route-search="@Model.Search" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

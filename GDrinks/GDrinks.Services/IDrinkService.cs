@@ -7,7 +7,7 @@
 
     public interface IDrinkService
     {
-        Task<IEnumerable<DrinkServiceModel>> AllAsync(int page, string categoryName);
+        Task<IEnumerable<DrinkServiceModel>> AllAsync(int page, string categoryName, string search);
 
         Task<IEnumerable<DrinkServiceModel>> Preferred();
 
@@ -18,5 +18,7 @@
         Task<int> NonAlcoholicCountAsync();
 
         Task<Drink> ByIdAsync(int id);
+
+        Task<int> CountBySearchAsync(string search);
     }
 }

@@ -20,25 +20,38 @@
             this.db = db;
         }
 
-        public async Task<IEnumerable<DrinkServiceModel>> AllAsync(int page, string categoryName)
+        public async Task<IEnumerable<DrinkServiceModel>> AllAsync(int page, string categoryName, string search)
         {
             var drinks = this.db
                .Drinks
                .OrderBy(d => d.Name)
+               .Skip((page - 1) * WebConstants.DrinksPerPage)
+               .Take(WebConstants.DrinksPerPage)
                .AsQueryable();
 
-            if (categoryName == null)
+            if (categoryName == null && search == null)
             {
                 return await drinks
-                    .Skip((page - 1) * WebConstants.DrinksPerPage)
-                    .Take(WebConstants.DrinksPerPage)
                     .To<DrinkServiceModel>()
                     .ToListAsync();
             }
 
-            var category = await this.db
-                .Categories
-                .FirstOrDefaultAsync(c => c.Name.ToLower() == categoryName.ToLower());
+            Category category = null;
+
+            if (categoryName != null)
+            {
+                category = await this.db
+                    .Categories
+                    .FirstOrDefaultAsync(c => c.Name.ToLower() == categoryName.ToLower());
+            }
+
+            if (search != null && category == null)
+            {
+                return await drinks
+                    .Where(d => d.Name.ToLower().Contains(search.ToLower()))
+                    .To<DrinkServiceModel>()
+                    .ToListAsync();
+            }
 
             if (category == null)
             {
@@ -47,8 +60,6 @@
 
             return await drinks
                 .Where(d => d.Category == category)
-                .Skip((page - 1) * WebConstants.DrinksPerPage)
-                .Take(WebConstants.DrinksPerPage)
                 .To<DrinkServiceModel>()
                 .ToListAsync();
         }
@@ -82,5 +93,11 @@
             => await this.db
                 .Drinks
                 .FirstOrDefaultAsync(d => d.Id == id);
+
+        public async Task<int> CountBySearchAsync(string search)
+            => await this.db
+                .Drinks
+                .Where(d => d.Name.ToLower().Contains(search.ToLower()))
+                .CountAsync();
     }
 }

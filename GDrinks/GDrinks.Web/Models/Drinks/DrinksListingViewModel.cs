@@ -9,6 +9,8 @@
 
         public string Category { get; set; }
 
+        public string Search { get; set; }
+
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }
