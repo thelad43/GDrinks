@@ -22,14 +22,17 @@
 
             var searchedDrinks = await this.drinks.CountBySearchAsync(search);
 
-            var drinksCount = 
-                category == null ? 
-                await this.drinks.CountAsync() : 
+            var drinksCount =
+                category == null ?
+                await this.drinks.CountAsync() :
                     (category.ToLower() == "alcoholic" ?
                         await this.drinks.AlcoholicCountAsync() :
                         await this.drinks.NonAlcoholicCountAsync());
 
-            drinksCount -= (drinksCount - searchedDrinks);
+            if (search != null)
+            {
+                drinksCount -= drinksCount - searchedDrinks;
+            }
 
             var model = new DrinksListingViewModel
             {

@@ -17,14 +17,14 @@
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var items = this.shoppingCart.GetShoppingCartItems();
+            var items = await this.shoppingCart.GetCartItemsAsync();
 
             this.shoppingCart.Items = items;
 
             var shoppingCartViewModel = new ShoppingCartViewModel
             {
                 ShoppingCart = this.shoppingCart,
-                ShoppingCartTotal = this.shoppingCart.GetShoppingCartTotal()
+                ShoppingCartTotal = await this.shoppingCart.GetTotalAsync()
             };
 
             return View(shoppingCartViewModel);

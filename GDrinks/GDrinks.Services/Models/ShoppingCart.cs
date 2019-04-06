@@ -1,6 +1,5 @@
 ﻿namespace GDrinks.Services.Models
 {
-    using GDrinks.Common.Mapping;
     using GDrinks.Data;
     using GDrinks.Models;
     using Microsoft.AspNetCore.Http;
@@ -9,6 +8,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class ShoppingCart
     {
@@ -23,7 +23,7 @@
 
         public List<CartItem> Items { get; set; } = new List<CartItem>();
 
-        public static ShoppingCart GetCart(IServiceProvider serviceProvider)
+        public static ShoppingCart Get(IServiceProvider serviceProvider)
         {
             var session = serviceProvider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
@@ -36,65 +36,65 @@
             return new ShoppingCart(db) { Id = cartId };
         }
 
-        public void AddToCart(Drink drink, int amount)
+        public async Task AddAsync(Drink drink)
         {
-            var shoppingCartItem =
-                    this.db.CartItems.SingleOrDefault(
-                        s => s.Drink.Id == drink.Id && s.ShoppingCartId == this.Id);
+            var cartItem = await this.db
+                .CartItems
+                .SingleOrDefaultAsync(s => s.Drink.Id == drink.Id && s.ShoppingCartId == this.Id);
 
-            if (shoppingCartItem == null)
+            if (cartItem == null)
             {
-                shoppingCartItem = new CartItem
+                cartItem = new CartItem
                 {
                     ShoppingCartId = Id,
                     Drink = drink,
                     Amount = 1
                 };
 
-                this.db.CartItems.Add(shoppingCartItem);
+                await this.db.CartItems.AddAsync(cartItem);
             }
             else
             {
-                shoppingCartItem.Amount++;
+                cartItem.Amount++;
             }
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public int RemoveFromCart(Drink drink)
+        public async Task<int> RemoveAsync(Drink drink)
         {
-            var shoppingCartItem =
-                    this.db.CartItems.SingleOrDefault(
-                        s => s.Drink.Id == drink.Id && s.ShoppingCartId == this.Id);
+            var cartItem = await this.db
+                .CartItems
+                .SingleOrDefaultAsync(s => s.Drink.Id == drink.Id && s.ShoppingCartId == this.Id);
 
             var localAmount = 0;
 
-            if (shoppingCartItem != null)
+            if (cartItem != null)
             {
-                if (shoppingCartItem.Amount > 1)
+                if (cartItem.Amount > 1)
                 {
-                    shoppingCartItem.Amount--;
-                    localAmount = shoppingCartItem.Amount;
+                    cartItem.Amount--;
+                    localAmount = cartItem.Amount;
                 }
                 else
                 {
-                    this.db.CartItems.Remove(shoppingCartItem);
+                    this.db.CartItems.Remove(cartItem);
                 }
             }
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
 
             return localAmount;
         }
 
-        public List<CartItem> GetShoppingCartItems()
-            => this.db
+        public async Task<List<CartItem>> GetCartItemsAsync()
+            => await this.db
                 .CartItems
                 .Where(ci => ci.ShoppingCartId == this.Id)
                 .Include(ci => ci.Drink)
-                .ToList();
+                .ToListAsync();
 
-        public void ClearCart()
+        public async Task ClearAsync()
         {
             var cartItems = this.db
                 .CartItems
@@ -102,14 +102,14 @@
 
             this.db.CartItems.RemoveRange(cartItems);
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public decimal GetShoppingCartTotal()
-            => this.db
+        public async Task<decimal> GetTotalAsync()
+            => await this.db
                 .CartItems
                 .Where(c => c.ShoppingCartId == this.Id)
                 .Select(c => c.Drink.Price * c.Amount)
-                .Sum();
+                .SumAsync();
     }
 }

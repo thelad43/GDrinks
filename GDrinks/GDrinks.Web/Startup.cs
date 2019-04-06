@@ -55,7 +55,7 @@
 
             services.AddSingleton<IDbSeederService, DbSeederService>();
 
-            services.AddScoped(sp => ShoppingCart.GetCart(sp));
+            services.AddScoped(sp => ShoppingCart.Get(sp));
 
             services.AddRouting(options => options.LowercaseUrls = true);
 

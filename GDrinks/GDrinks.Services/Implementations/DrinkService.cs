@@ -25,13 +25,13 @@
             var drinks = this.db
                .Drinks
                .OrderBy(d => d.Name)
-               .Skip((page - 1) * WebConstants.DrinksPerPage)
-               .Take(WebConstants.DrinksPerPage)
                .AsQueryable();
 
             if (categoryName == null && search == null)
             {
                 return await drinks
+                    .Skip((page - 1) * WebConstants.DrinksPerPage)
+                    .Take(WebConstants.DrinksPerPage)
                     .To<DrinkServiceModel>()
                     .ToListAsync();
             }
@@ -49,6 +49,8 @@
             {
                 return await drinks
                     .Where(d => d.Name.ToLower().Contains(search.ToLower()))
+                    .Skip((page - 1) * WebConstants.DrinksPerPage)
+                    .Take(WebConstants.DrinksPerPage)
                     .To<DrinkServiceModel>()
                     .ToListAsync();
             }
@@ -60,6 +62,8 @@
 
             return await drinks
                 .Where(d => d.Category == category)
+                .Skip((page - 1) * WebConstants.DrinksPerPage)
+                .Take(WebConstants.DrinksPerPage)
                 .To<DrinkServiceModel>()
                 .ToListAsync();
         }
@@ -97,7 +101,7 @@
         public async Task<int> CountBySearchAsync(string search)
             => await this.db
                 .Drinks
-                .Where(d => d.Name.ToLower().Contains(search.ToLower()))
+                .Where(d => d.Name.ToLower().Contains(search == null ? string.Empty : search.ToLower()))
                 .CountAsync();
     }
 }

@@ -20,16 +20,16 @@
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var items = this.shoppingCart.GetShoppingCartItems();
+            var items = await this.shoppingCart.GetCartItemsAsync();
 
             this.shoppingCart.Items = items;
 
             var model = new ShoppingCartViewModel
             {
                 ShoppingCart = this.shoppingCart,
-                ShoppingCartTotal = this.shoppingCart.GetShoppingCartTotal()
+                ShoppingCartTotal = await this.shoppingCart.GetTotalAsync()
             };
 
             return View(model);
@@ -45,8 +45,7 @@
                 return NotFound();
             }
 
-
-            this.shoppingCart.AddToCart(drink, 1);
+            await this.shoppingCart.AddAsync(drink);
 
             return RedirectToAction(nameof(Index));
         }
@@ -61,7 +60,7 @@
                 return NotFound();
             }
 
-            this.shoppingCart.RemoveFromCart(drink);
+            await this.shoppingCart.RemoveAsync(drink);
 
             return RedirectToAction(nameof(Index));
         }
