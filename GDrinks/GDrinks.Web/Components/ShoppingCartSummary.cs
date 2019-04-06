@@ -3,7 +3,6 @@
     using GDrinks.Services.Models;
     using GDrinks.Web.Models;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class ShoppingCartSummary : ViewComponent

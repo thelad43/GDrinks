@@ -4,15 +4,14 @@
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 @inject SignInManager<User> SignInManager
 
-
 @if (Model.ShoppingCart.Items.Count > 0 && SignInManager.IsSignedIn(User))
 {
-    <li>
-        <a asp-controller="ShoppingCart">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-            <span id="cart-status">
-                @Model.ShoppingCart.Items.Count
-            </span>
-        </a>
-    </li>
+<li>
+    <a asp-controller="ShoppingCart">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <span id="cart-status">
+            @Model.ShoppingCart.Items.Count
+        </span>
+    </a>
+</li>
 }

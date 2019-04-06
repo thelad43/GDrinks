@@ -15,6 +15,7 @@
         {
             this.db = db;
         }
+
         public async Task<IEnumerable<Category>> GetAsync()
             => await this.db
                 .Categories

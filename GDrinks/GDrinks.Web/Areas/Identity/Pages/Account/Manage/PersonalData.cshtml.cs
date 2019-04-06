@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using GDrinks.Models;
+﻿using GDrinks.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace GDrinks.Web.Areas.Identity.Pages.Account.Manage
 {

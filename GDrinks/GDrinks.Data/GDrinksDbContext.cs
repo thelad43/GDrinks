@@ -21,7 +21,6 @@
 
         public DbSet<CartItem> CartItems { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);

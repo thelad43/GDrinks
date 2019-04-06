@@ -8,5 +8,8 @@
 
         public const string Alcoholic = "alcoholic";
         public const string NonAlcoholic = "non-alcoholic";
+
+        public const string TempDataSuccessMessageKey = "SuccessMessage";
+        public const string TempDataErrorMessageKey = "ErrorMessage";
     }
 }

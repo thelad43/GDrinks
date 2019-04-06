@@ -59,6 +59,6 @@
             }
 
             return View(drink);
-        } 
+        }
     }
 }
