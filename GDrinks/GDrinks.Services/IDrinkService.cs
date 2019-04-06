@@ -19,6 +19,8 @@
 
         Task<Drink> ByIdAsync(int id);
 
+        Task<TModel> ByIdAsync<TModel>(int id);
+
         Task<int> CountBySearchAsync(string search);
     }
 }

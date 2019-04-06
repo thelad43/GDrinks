@@ -6,8 +6,14 @@ nav{
     padding:8px;
 }
 
-.loginForm{
-    margin:10%;
+div .pic-details {
+    width: 450px;
+    height: 350px;
+    margin-top: -280px
+}
+
+.loginForm {
+    margin: 10%;
 }
 
 .checkoutForm{

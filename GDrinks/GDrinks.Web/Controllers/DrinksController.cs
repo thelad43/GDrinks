@@ -2,6 +2,7 @@
 {
     using GDrinks.Common;
     using GDrinks.Services;
+    using GDrinks.Services.Models;
     using GDrinks.Web.Models.Drinks;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -16,6 +17,7 @@
             this.drinks = drinks;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(int id = 1, string category = null, string search = null)
         {
             var drinks = await this.drinks.AllAsync(id, category, search);
@@ -46,5 +48,17 @@
 
             return View(model);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var drink = await this.drinks.ByIdAsync<DrinkDetailsServiceModel>(id);
+
+            if (drink == null)
+            {
+                return NotFound();
+            }
+
+            return View(drink);
+        } 
     }
 }

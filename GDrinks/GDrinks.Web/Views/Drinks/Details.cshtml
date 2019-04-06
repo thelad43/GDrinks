@@ -1,0 +1,40 @@
+﻿@model DrinkDetailsServiceModel
+
+@{
+    ViewData["Title"] = $"Details for '{Model.Name}'";
+}
+
+<div class="container marginTop">
+    <div class="row">
+        <div class="card">
+            <div class="row card-block"></div>
+            <h2 class="card-title">@Model.Name</h2>
+            <p>
+                <h3>Category: @Model.Category.Name</h3>
+            </p>
+            <p>
+                <h3>Price: @Model.Price.ToString("c")</h3>
+            </p>
+            <p>
+                <h3>Is Preferred Drink: @(Model.IsPreferredDrink ? "Yes" : "No")</h3>
+            </p>
+            <p>
+                <h3>Is in stock: @(Model.InStock ? "Yes" : "No")</h3>
+            </p>
+            <div class="col-md-5"></div>
+            <div class="col-md-7">
+                <img src="@Model.ImageUrl" class="img-fluid img-responsive pic-details">
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p class="card-text">@Model.FullDescription.</p>
+        <p class="btn btn-group pull-right">
+            <a asp-area="" asp-controller="Drinks" asp-action="Index" class="btn btn-default">Show all drinks</a>
+            <a class="btn btn-success" id="cartButton" asp-area="" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@Model.Id">Add @Model.Name to cart</a>
+        </p>
+    </div>
+</div>

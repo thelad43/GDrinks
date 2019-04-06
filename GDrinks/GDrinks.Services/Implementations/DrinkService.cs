@@ -98,6 +98,13 @@
                 .Drinks
                 .FirstOrDefaultAsync(d => d.Id == id);
 
+        public async Task<TModel> ByIdAsync<TModel>(int id)
+            => await this.db
+                .Drinks
+                .Where(d => d.Id == id)
+                .To<TModel>()
+                .FirstOrDefaultAsync();
+
         public async Task<int> CountBySearchAsync(string search)
             => await this.db
                 .Drinks
