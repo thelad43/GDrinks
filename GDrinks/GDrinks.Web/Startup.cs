@@ -63,8 +63,14 @@
 
             services.AddSession();
 
+            services.AddResponseCompression();
+
             services
-                .AddMvc()
+                .AddMvc(options =>
+                {
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -82,6 +88,7 @@
             }
 
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
