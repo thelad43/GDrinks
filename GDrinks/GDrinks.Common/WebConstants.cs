@@ -5,6 +5,7 @@
         public const int DrinksPerPage = 9;
 
         public const string AdministratorRole = "Administrator";
+        public const string AdminArea = "Admin";
 
         public const string Alcoholic = "alcoholic";
         public const string NonAlcoholic = "non-alcoholic";
