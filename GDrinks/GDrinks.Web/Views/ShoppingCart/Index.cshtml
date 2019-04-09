@@ -1,7 +1,11 @@
 ﻿@model ShoppingCartViewModel
 
+@{ 
+    ViewData["Title"] = "Your shopping cart";
+}
+
 <div class="row checkoutForm">
-    <h2>Your shopping cart</h2>
+    <h2>@ViewData["Title"]</h2>
     <h4>Here are the drinks in your shopping cart.</h4>
     <table class="table table-bordered table-striped">
         <thead>

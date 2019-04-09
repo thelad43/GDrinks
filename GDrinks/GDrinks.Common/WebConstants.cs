@@ -3,6 +3,7 @@
     public static class WebConstants
     {
         public const int DrinksPerPage = 9;
+        public const int OrdersPerPage = 15;
 
         public const string AdministratorRole = "Administrator";
         public const string AdminArea = "Admin";

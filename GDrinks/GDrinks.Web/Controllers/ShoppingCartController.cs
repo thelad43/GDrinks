@@ -46,7 +46,6 @@
             }
 
             await this.shoppingCart.AddAsync(drink);
-
             return RedirectToAction(nameof(Index));
         }
 

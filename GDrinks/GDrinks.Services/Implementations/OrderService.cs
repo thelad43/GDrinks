@@ -1,9 +1,14 @@
 ﻿namespace GDrinks.Services.Implementations
 {
+    using GDrinks.Common;
+    using GDrinks.Common.Mapping;
     using GDrinks.Data;
     using GDrinks.Models;
     using GDrinks.Services.Models;
+    using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class OrderService : IOrderService
@@ -15,7 +20,26 @@
             this.db = db;
         }
 
-        public async Task CreateAsync(string addressLine, string zipCode, string country, string userId, ShoppingCart shoppingCart)
+        public async Task<IEnumerable<OrderServiceModel>> AllAsync(int page)
+            => await this.db
+                .Orders
+                .OrderBy(o => o.OrderedOn)
+                .Skip((page - 1) * WebConstants.OrdersPerPage)
+                .Take(WebConstants.OrdersPerPage)
+                .To<OrderServiceModel>()
+                .ToListAsync();
+
+        public async Task<int> CountAsync()
+            => await this.db
+                .Orders
+                .CountAsync();
+
+        public async Task CreateAsync(
+            string addressLine,
+            string zipCode,
+            string country,
+            string userId,
+            ShoppingCart shoppingCart)
         {
             var order = new Order
             {
@@ -44,7 +68,15 @@
                 await this.db.AddAsync(orderDetail);
             }
 
-            await db.SaveChangesAsync();
+            await this.db.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<OrderItemServiceModel>> ItemsByOrderIdAsync(int id)
+            => await this.db
+                .OrderItems
+                .Where(oi => oi.OrderId == id)
+                .OrderBy(oi => oi.Amount)
+                .To<OrderItemServiceModel>()
+                .ToListAsync();
     }
 }

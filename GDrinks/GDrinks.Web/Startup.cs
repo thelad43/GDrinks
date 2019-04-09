@@ -30,7 +30,7 @@
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+                //options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -55,13 +55,13 @@
 
             services.AddSingleton<IDbSeederService, DbSeederService>();
 
-            services.AddScoped(sp => ShoppingCart.Get(sp));
-
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddDomainServices();
 
             services.AddSession();
+
+            services.AddScoped(sp => ShoppingCart.Get(sp));
 
             services.AddResponseCompression();
 
@@ -69,7 +69,6 @@
                 .AddMvc(options =>
                 {
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -44,12 +44,13 @@
                         </li>
                         @if (User.IsInRole(WebConstants.AdministratorRole))
                         {
-                            <li class="dropdown">
-                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-area="Admin" asp-controller="Drinks" asp-action="Add">Add a drink</a></li>
-                                </ul>
-                            </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="Admin" asp-controller="Drinks" asp-action="Add">Add a drink</a></li>
+                                <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                            </ul>
+                        </li>
                         }
 
                         @await Component.InvokeAsync("ShoppingCartSummary")
@@ -72,24 +73,24 @@
         <main role="main" class="pb-3">
             <br />
             <br />
+            <br />
             @if (TempData.ContainsKey(WebConstants.TempDataSuccessMessageKey))
             {
-            <br />
-            <br />
-            <div class="alert alert-success">
-                @TempData[WebConstants.TempDataSuccessMessageKey]
-            </div>
+                <br />
+                <br />
+                <div class="alert alert-success">
+                    @TempData[WebConstants.TempDataSuccessMessageKey]
+                </div>
             }
 
             @if (TempData.ContainsKey(WebConstants.TempDataErrorMessageKey))
             {
-            <br />
-            <br />
-            <div class="alert alert-danger">
-                @TempData[WebConstants.TempDataErrorMessageKey]
-            </div>
+                <br />
+                <br />
+                <div class="alert alert-danger">
+                    @TempData[WebConstants.TempDataErrorMessageKey]
+                </div>
             }
-            <br />
             @RenderBody()
         </main>
     </div>

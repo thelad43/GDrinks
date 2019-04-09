@@ -171,7 +171,7 @@
             var drink = await this.ByIdAsync(id);
             this.db.Remove(drink);
             await this.db.SaveChangesAsync();
-            
+
             return drink.Name;
         }
     }
