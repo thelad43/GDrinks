@@ -45,5 +45,7 @@
             bool isPreferred,
             bool isInStock,
             int categoryId);
+
+        Task<string> DeleteAsync(int id);
     }
 }

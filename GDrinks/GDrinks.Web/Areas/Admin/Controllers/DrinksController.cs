@@ -121,5 +121,42 @@
 
             return this.RedirectToCustomAction(nameof(HomeController.Index), nameof(HomeController));
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var drink = await this.drinks.ByIdAsync(id);
+
+            if (drink == null)
+            {
+                return NotFound();
+            }
+
+            var model = new DeleteDrinkViewModel
+            {
+                Id = id,
+                Name = drink.Name
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Destroy(int id)
+        {
+            var drink = await this.drinks.ByIdAsync(id);
+
+            if (drink == null)
+            {
+                return NotFound();
+            }
+
+            var drinkName = await this.drinks.DeleteAsync(id);
+
+            TempData.AddSuccessMessage($"Successfully deleted drink: {drinkName}");
+
+            return this.RedirectToCustomAction(nameof(HomeController.Index), nameof(HomeController));
+        }
     }
 }
