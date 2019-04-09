@@ -44,11 +44,80 @@
                 model.Price,
                 model.ImageUrl,
                 model.ImageThumbnailUrl,
-                model.IsPreferredDrink,
-                model.InStock,
+                model.IsPreferred,
+                model.IsInStock,
                 category.Id);
 
             TempData.AddSuccessMessage($"Successfully created new drink: {model.Name}");
+
+            return this.RedirectToCustomAction(nameof(HomeController.Index), nameof(HomeController));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var drink = await this.drinks.ByIdAsync(id);
+
+            if (drink == null)
+            {
+                return NotFound();
+            }
+
+            var category = await this.categories.ByIdAsync(drink.CategoryId);
+
+            var model = new EditDrinkViewModel
+            {
+                Id = id,
+                Name = drink.Name,
+                Description = drink.Description,
+                FullDescription = drink.FullDescription,
+                Price = drink.Price,
+                ImageUrl = drink.ImageUrl,
+                ImageThumbnailUrl = drink.ImageThumbnailUrl,
+                IsPreferred = drink.IsPreferred,
+                IsInStock = drink.IsInStock,
+                Category = category.Name
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditDrinkViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var drink = await this.drinks.ByIdAsync(model.Id);
+
+            if (drink == null)
+            {
+                return NotFound();
+            }
+
+            var category = await this.categories.ByNameAsync(model.Category);
+
+            if (category == null)
+            {
+                TempData.AddErrorMessage($"Invalid category: {model.Category}");
+                return View(model);
+            }
+
+            await this.drinks.EditAsync(
+                model.Id,
+                model.Name,
+                model.Description,
+                model.FullDescription,
+                model.Price,
+                model.ImageUrl,
+                model.ImageThumbnailUrl,
+                model.IsPreferred,
+                model.IsInStock,
+                category.Id);
+
+            TempData.AddSuccessMessage($"Successfully edited drink: {model.Name}");
 
             return this.RedirectToCustomAction(nameof(HomeController.Index), nameof(HomeController));
         }

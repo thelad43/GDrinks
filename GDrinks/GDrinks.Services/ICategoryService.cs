@@ -9,5 +9,7 @@
         Task<IEnumerable<Category>> AllAsync();
 
         Task<Category> ByNameAsync(string categoryName);
+
+        Task<Category> ByIdAsync(int categoryId);
     }
 }

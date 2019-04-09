@@ -33,9 +33,9 @@
         [Url]
         public string ImageThumbnailUrl { get; set; }
 
-        public bool IsPreferredDrink { get; set; }
+        public bool IsPreferred { get; set; }
 
-        public bool InStock { get; set; }
+        public bool IsInStock { get; set; }
 
         public string Category { get; set; }
 

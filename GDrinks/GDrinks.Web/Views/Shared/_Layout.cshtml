@@ -57,7 +57,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><partial name="_LoginPartial" /></li>
                     </ul>
-                    <form asp-area="" asp-controller="Drinks" asp-action="Index" class="navbar-form navbar-right">
+                    <form asp-area="" asp-controller="Drinks" asp-action="Index" asp-route-id="1" method="get" class="navbar-form navbar-right">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search for a drink" name="search">
                             <button class="btn btn-primary" type="submit">Search</button>

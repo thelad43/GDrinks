@@ -30,8 +30,20 @@
             decimal price,
             string imageUrl,
             string imageThumbnailUrl,
-            bool isPreferredDrink,
-            bool inStock,
+            bool isPreferred,
+            bool isInStock,
+            int categoryId);
+
+        Task EditAsync(
+            int id,
+            string name,
+            string description,
+            string fullDescription,
+            decimal price,
+            string imageUrl,
+            string imageThumbnailUrl,
+            bool isPreferred,
+            bool isInStock,
             int categoryId);
     }
 }

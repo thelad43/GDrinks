@@ -12,6 +12,12 @@
         </div>
         <div class="addToCart text-right">
             <p class="button ">
+                <a class="btn btn-warning" asp-area="Admin" asp-controller="Drinks" asp-action="Edit" asp-route-id="@Model.Id">
+                    Edit
+                </a>
+                <a class="btn btn-danger" asp-area="Admin" asp-controller="Drinks" asp-action="Delete" asp-route-id="@Model.Id">
+                    Delete
+                </a>
                 <a class="btn btn-success" id="cartButton" asp-area="" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@Model.Id">
                     Add to cart
                 </a>

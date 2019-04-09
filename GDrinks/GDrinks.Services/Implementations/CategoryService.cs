@@ -22,6 +22,11 @@
                 .OrderBy(c => c.Name)
                 .ToListAsync();
 
+        public async Task<Category> ByIdAsync(int categoryId)
+            => await this.db
+                .Categories
+                .FirstOrDefaultAsync(c => c.Id == categoryId);
+
         public async Task<Category> ByNameAsync(string categoryName)
             => await this.db
                 .Categories

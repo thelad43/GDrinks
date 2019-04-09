@@ -118,8 +118,8 @@
             decimal price,
             string imageUrl,
             string imageThumbnailUrl,
-            bool isPreferredDrink,
-            bool inStock,
+            bool isPreferred,
+            bool isInStock,
             int categoryId)
         {
             var drink = new Drink
@@ -130,12 +130,39 @@
                 Price = price,
                 ImageUrl = imageUrl,
                 ImageThumbnailUrl = imageThumbnailUrl,
-                IsPreferred = isPreferredDrink,
-                IsInStock = inStock,
+                IsPreferred = isPreferred,
+                IsInStock = isInStock,
                 CategoryId = categoryId
             };
 
             await this.db.AddAsync(drink);
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(
+            int id,
+            string name,
+            string description,
+            string fullDescription,
+            decimal price,
+            string imageUrl,
+            string imageThumbnailUrl,
+            bool isPreferred,
+            bool isInStock,
+            int categoryId)
+        {
+            var drink = await this.db.Drinks.FindAsync(id);
+
+            drink.Name = name;
+            drink.Description = description;
+            drink.FullDescription = fullDescription;
+            drink.Price = price;
+            drink.ImageUrl = imageUrl;
+            drink.ImageThumbnailUrl = imageThumbnailUrl;
+            drink.IsPreferred = isPreferred;
+            drink.IsInStock = isInStock;
+            drink.CategoryId = categoryId;
+
             await this.db.SaveChangesAsync();
         }
     }
