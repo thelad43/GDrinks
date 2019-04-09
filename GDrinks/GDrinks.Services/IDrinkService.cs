@@ -22,5 +22,16 @@
         Task<TModel> ByIdAsync<TModel>(int id);
 
         Task<int> CountBySearchAsync(string search);
+
+        Task AddAsync(
+            string name,
+            string description,
+            string fullDescription,
+            decimal price,
+            string imageUrl,
+            string imageThumbnailUrl,
+            bool isPreferredDrink,
+            bool inStock,
+            int categoryId);
     }
 }

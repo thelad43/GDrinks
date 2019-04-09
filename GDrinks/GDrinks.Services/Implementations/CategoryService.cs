@@ -16,10 +16,15 @@
             this.db = db;
         }
 
-        public async Task<IEnumerable<Category>> GetAsync()
+        public async Task<IEnumerable<Category>> AllAsync()
             => await this.db
                 .Categories
                 .OrderBy(c => c.Name)
                 .ToListAsync();
+
+        public async Task<Category> ByNameAsync(string categoryName)
+            => await this.db
+                .Categories
+                .FirstOrDefaultAsync(c => c.Name.ToLower() == categoryName.ToLower());
     }
 }

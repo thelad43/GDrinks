@@ -2,14 +2,24 @@
 {
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class ValidationOnDrinkModel : Migration
+    public partial class DrinksTableConstraints : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "IsPreferredDrink",
+                table: "Drinks",
+                newName: "IsPreferred");
+
+            migrationBuilder.RenameColumn(
+                name: "InStock",
+                table: "Drinks",
+                newName: "IsInStock");
+
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Drinks",
-                maxLength: 20,
+                maxLength: 50,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
@@ -31,7 +41,7 @@
             migrationBuilder.AlterColumn<string>(
                 name: "FullDescription",
                 table: "Drinks",
-                maxLength: 200,
+                maxLength: 2000,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
@@ -39,7 +49,7 @@
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
                 table: "Drinks",
-                maxLength: 30,
+                maxLength: 300,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
@@ -47,12 +57,22 @@
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "IsPreferred",
+                table: "Drinks",
+                newName: "IsPreferredDrink");
+
+            migrationBuilder.RenameColumn(
+                name: "IsInStock",
+                table: "Drinks",
+                newName: "InStock");
+
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Drinks",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldMaxLength: 20);
+                oldMaxLength: 50);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ImageUrl",
@@ -71,14 +91,14 @@
                 table: "Drinks",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldMaxLength: 200);
+                oldMaxLength: 2000);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
                 table: "Drinks",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldMaxLength: 30);
+                oldMaxLength: 300);
         }
     }
 }

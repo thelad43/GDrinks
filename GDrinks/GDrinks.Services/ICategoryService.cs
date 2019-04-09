@@ -6,6 +6,8 @@
 
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAsync();
+        Task<IEnumerable<Category>> AllAsync();
+
+        Task<Category> ByNameAsync(string categoryName);
     }
 }

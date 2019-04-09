@@ -89,7 +89,7 @@
             => await this.db
                 .Drinks
                 .OrderBy(d => d.Name)
-                .Where(d => d.IsPreferredDrink)
+                .Where(d => d.IsPreferred)
                 .To<DrinkServiceModel>()
                 .ToListAsync();
 
@@ -110,5 +110,33 @@
                 .Drinks
                 .Where(d => d.Name.ToLower().Contains(search == null ? string.Empty : search.ToLower()))
                 .CountAsync();
+
+        public async Task AddAsync(
+            string name,
+            string description,
+            string fullDescription,
+            decimal price,
+            string imageUrl,
+            string imageThumbnailUrl,
+            bool isPreferredDrink,
+            bool inStock,
+            int categoryId)
+        {
+            var drink = new Drink
+            {
+                Name = name,
+                Description = description,
+                FullDescription = fullDescription,
+                Price = price,
+                ImageUrl = imageUrl,
+                ImageThumbnailUrl = imageThumbnailUrl,
+                IsPreferred = isPreferredDrink,
+                IsInStock = inStock,
+                CategoryId = categoryId
+            };
+
+            await this.db.AddAsync(drink);
+            await this.db.SaveChangesAsync();
+        }
     }
 }

@@ -14,6 +14,6 @@
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
-            => View(await this.categories.GetAsync());
+            => View(await this.categories.AllAsync());
     }
 }

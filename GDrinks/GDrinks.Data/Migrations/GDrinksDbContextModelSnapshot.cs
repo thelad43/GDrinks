@@ -62,11 +62,11 @@ namespace GDrinks.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(30);
+                        .HasMaxLength(300);
 
                     b.Property<string>("FullDescription")
                         .IsRequired()
-                        .HasMaxLength(200);
+                        .HasMaxLength(2000);
 
                     b.Property<string>("ImageThumbnailUrl")
                         .IsRequired();
@@ -74,13 +74,13 @@ namespace GDrinks.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired();
 
-                    b.Property<bool>("InStock");
+                    b.Property<bool>("IsInStock");
 
-                    b.Property<bool>("IsPreferredDrink");
+                    b.Property<bool>("IsPreferred");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20);
+                        .HasMaxLength(50);
 
                     b.Property<decimal>("Price");
 

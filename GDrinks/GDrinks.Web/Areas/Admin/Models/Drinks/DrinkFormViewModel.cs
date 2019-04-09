@@ -1,12 +1,12 @@
-﻿namespace GDrinks.Models
+﻿namespace GDrinks.Web.Areas.Admin.Models.Drinks
 {
-    using System.Collections.Generic;
+    using AutoMapper;
+    using GDrinks.Common.Mapping;
+    using GDrinks.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class Drink
+    public class DrinkFormViewModel : IMapFrom<Category>, IHaveCustomMappings
     {
-        public int Id { get; set; }
-
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
@@ -33,14 +33,14 @@
         [Url]
         public string ImageThumbnailUrl { get; set; }
 
-        public bool IsPreferred { get; set; }
+        public bool IsPreferredDrink { get; set; }
 
-        public bool IsInStock { get; set; }
+        public bool InStock { get; set; }
 
-        public int CategoryId { get; set; }
+        public string Category { get; set; }
 
-        public Category Category { get; set; }
-
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+            => configuration.CreateMap<Drink, DrinkFormViewModel>()
+                .ForMember(src => src.Category, cfg => cfg.MapFrom(dest => dest.Category.Name));
     }
 }
