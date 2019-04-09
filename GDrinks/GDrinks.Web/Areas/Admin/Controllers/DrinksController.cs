@@ -122,7 +122,6 @@
             return this.RedirectToCustomAction(nameof(HomeController.Index), nameof(HomeController));
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
