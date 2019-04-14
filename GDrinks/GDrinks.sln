@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Web", "GDrinks.Web\GDrinks.Web.csproj", "{90F74ED2-1165-4E16-8A2B-B3585F58D66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDrinks.Web", "GDrinks.Web\GDrinks.Web.csproj", "{90F74ED2-1165-4E16-8A2B-B3585F58D66A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Data", "GDrinks.Data\GDrinks.Data.csproj", "{6FD6B049-F44F-41F2-A8F0-0340C4466A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDrinks.Data", "GDrinks.Data\GDrinks.Data.csproj", "{6FD6B049-F44F-41F2-A8F0-0340C4466A13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Models", "GDrinks.Models\GDrinks.Models.csproj", "{C78C65ED-13B2-45CF-BA8A-25F9450FD432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDrinks.Models", "GDrinks.Models\GDrinks.Models.csproj", "{C78C65ED-13B2-45CF-BA8A-25F9450FD432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Services", "GDrinks.Services\GDrinks.Services.csproj", "{4DF44DB6-A95E-4C09-91F7-2F4D28BD2791}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDrinks.Services", "GDrinks.Services\GDrinks.Services.csproj", "{4DF44DB6-A95E-4C09-91F7-2F4D28BD2791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Common", "GDrinks.Common\GDrinks.Common.csproj", "{04E3A800-2257-42DA-8BE8-29067FF35300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDrinks.Common", "GDrinks.Common\GDrinks.Common.csproj", "{04E3A800-2257-42DA-8BE8-29067FF35300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDrinks.Tests", "GDrinks.Tests\GDrinks.Tests.csproj", "{C2FEE98D-2A1E-413D-8F30-70FF71D5098D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{04E3A800-2257-42DA-8BE8-29067FF35300}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04E3A800-2257-42DA-8BE8-29067FF35300}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04E3A800-2257-42DA-8BE8-29067FF35300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2FEE98D-2A1E-413D-8F30-70FF71D5098D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2FEE98D-2A1E-413D-8F30-70FF71D5098D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2FEE98D-2A1E-413D-8F30-70FF71D5098D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2FEE98D-2A1E-413D-8F30-70FF71D5098D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
