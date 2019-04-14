@@ -3,33 +3,36 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using static GDrinks.Common.DataConstants;
+    using static GDrinks.Common.DataErrorMessages;
+
     public class Drink
     {
         public int Id { get; set; }
 
-        [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [Required(ErrorMessage = DrinkNameErrorMessage)]
+        [MinLength(DrinkNameMinLength, ErrorMessage = DrinkNameMinLengthErrorMessage)]
+        [MaxLength(DrinkNameMaxLength, ErrorMessage = DrinkNameMaxLengthErrorMessage)]
         public string Name { get; set; }
 
-        [Required]
-        [MinLength(6)]
-        [MaxLength(300)]
+        [Required(ErrorMessage = DrinkDescriptionErrorMessage)]
+        [MinLength(DrinkDescriptionMinLength, ErrorMessage = DrinkDescriptionMinLengthErrorMessage)]
+        [MaxLength(DrinkDescriptionMaxLength, ErrorMessage = DrinkDescriptionMaxLengthErrorMessage)]
         public string Description { get; set; }
 
-        [Required]
-        [MinLength(20)]
-        [MaxLength(2000)]
+        [Required(ErrorMessage = DrinkFullDescriptionErrorMessage)]
+        [MinLength(DrinkFullDescriptionMinLength, ErrorMessage = DrinkFullDescriptionMinLengthErrorMessage)]
+        [MaxLength(DrinkFullDescriptionMaxLength, ErrorMessage = DrinkFullDescriptionMaxLengthErrorMessage)]
         public string FullDescription { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(DrinkPriceMinLength, DrinkPriceMaxLength, ErrorMessage = DrinkPriceErrorMessage)]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = DrinkImageUrlErrorMessage)]
         [Url]
         public string ImageUrl { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = DrinkImageThumbnailUrlErrorMessage)]
         [Url]
         public string ImageThumbnailUrl { get; set; }
 
