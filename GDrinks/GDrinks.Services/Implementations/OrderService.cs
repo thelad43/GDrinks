@@ -57,7 +57,9 @@
 
             foreach (var item in items)
             {
-                var orderDetail = new OrderItem()
+                item.Drink = await this.db.Drinks.SingleAsync(d => d.Id == item.DrinkId);
+
+                var orderItem = new OrderItem()
                 {
                     Amount = item.Amount,
                     DrinkId = item.Drink.Id,
@@ -65,7 +67,7 @@
                     Price = item.Drink.Price
                 };
 
-                await this.db.AddAsync(orderDetail);
+                await this.db.AddAsync(orderItem);
             }
 
             await this.db.SaveChangesAsync();
