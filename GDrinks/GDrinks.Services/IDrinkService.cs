@@ -9,7 +9,7 @@
     {
         Task<IEnumerable<DrinkServiceModel>> AllAsync(int page, string categoryName, string search);
 
-        Task<IEnumerable<DrinkServiceModel>> Preferred();
+        Task<IEnumerable<DrinkServiceModel>> PreferredAsync();
 
         Task<int> CountAsync();
 

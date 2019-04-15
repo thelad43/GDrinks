@@ -16,7 +16,7 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index() => View(await this.drinks.Preferred());
+        public async Task<IActionResult> Index() => View(await this.drinks.PreferredAsync());
 
         [HttpGet]
         public IActionResult Privacy() => View();

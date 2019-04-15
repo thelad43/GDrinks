@@ -60,6 +60,12 @@
                 throw new InvalidOperationException($"Category {categoryName} is not found.");
             }
 
+            if (search != null)
+            {
+                drinks = drinks
+                    .Where(d => d.Name.ToLower().Contains(search.ToLower()));
+            }
+
             return await drinks
                 .Where(d => d.Category == category)
                 .Skip((page - 1) * WebConstants.DrinksPerPage)
@@ -85,7 +91,7 @@
                 .Where(d => d.Category.Name.ToLower() != WebConstants.Alcoholic)
                 .CountAsync();
 
-        public async Task<IEnumerable<DrinkServiceModel>> Preferred()
+        public async Task<IEnumerable<DrinkServiceModel>> PreferredAsync()
             => await this.db
                 .Drinks
                 .OrderBy(d => d.Name)
